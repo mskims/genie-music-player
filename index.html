@@ -10,7 +10,8 @@
         body.unlogged .for-logged-user {
             display: none;
         }
-        body.logged .for-unlogged-user{
+
+        body.logged .for-unlogged-user {
             display: none;
         }
     </style>
@@ -19,15 +20,15 @@
 <h1>genie!</h1>
 <div class="for-unlogged-user">
 
-<form action="#" method="POST" id="login-form">
-    <input type="text" name="id">
-    <input type="password" name="password">
-    <button>login</button>
-</form>
+    <form action="#" method="POST" id="login-form">
+        <input type="text" name="id">
+        <input type="password" name="password">
+        <button>login</button>
+    </form>
 </div>
 <div class="for-logged-user">
     <h1><span id="user-id"></span> 님</h1>
-<button id="do-logout">logout</button>
+    <button id="do-logout">logout</button>
 </div>
 <script>
     'use strict'
@@ -50,6 +51,7 @@
 
         document.getElementById('do-logout').addEventListener('click', function () {
             ipcRenderer.send('logout')
+            toggleLoggedUserClass(false)
         })
 
         ipcRenderer.on('alert', (e, payload) => {
@@ -57,11 +59,22 @@
         })
 
         ipcRenderer.on('login.succeed', (e, user) => {
+            $loginForm.reset()
+
             console.log(`${user.id} 님 로그인 완료!`)
-            document.body.classList.remove('unlogged')
-            document.body.classList.add('logged')
+            toggleLoggedUserClass(true)
             document.getElementById('user-id').innerText = user.id
         })
+
+        function toggleLoggedUserClass(flag) {
+            if (flag) {
+                document.body.classList.remove('unlogged')
+                document.body.classList.add('logged')
+            } else {
+                document.body.classList.add('unlogged')
+                document.body.classList.remove('logged')
+            }
+        }
     }
 </script>
 </body>
