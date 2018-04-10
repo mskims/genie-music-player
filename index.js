@@ -97,6 +97,7 @@ function logout() {
             keytar.deletePassword(KEYTAR_SERVICE_NAME, credential.account)
         })
     })
+    nativePlayerWindow.loadURL(LOGOUT_URL)
 }
 
 // This method will be called when Electron has finished
