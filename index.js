@@ -81,6 +81,9 @@ function login(id, password) {
                 }
                 mainWindow.webContents.send('login.succeed', user)
                 nativePlayerWindow.loadURL(PLAYER_URL)
+                nativePlayerWindow.webContents.once('dom-ready', () => {
+                    nativePlayerWindow.webContents.executeJavaScript(`fnPlay(0);fnGoAnotherIP()`)
+                })
             } else {
                 mainWindow.webContents.send('alert', msgStr)
             }
