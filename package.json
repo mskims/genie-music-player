@@ -1,0 +1,25 @@
+{
+  "name": "genie-music-player",
+  "version": "1.0.0",
+  "description": "Native genie music player on OS X",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mskims/genie-music-player.git"
+  },
+  "author": "Minseok Kim <its@mskim.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mskims/genie-music-player/issues"
+  },
+  "homepage": "https://github.com/mskims/genie-music-player#readme",
+  "devDependencies": {
+    "electron": "1.8.4",
+    "electron-packager": "^12.0.0",
+    "electron-rebuild": "^1.7.3",
+    "keytar": "^4.2.1"
+  }
+}

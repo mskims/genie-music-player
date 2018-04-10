@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body.unlogged .for-logged-user {
+            display: none;
+        }
+        body.logged .for-unlogged-user{
+            display: none;
+        }
+    </style>
+</head>
+<body class="unlogged">
+<h1>genie!</h1>
+<div class="for-unlogged-user">
+
+<form action="#" method="POST" id="login-form">
+    <input type="text" name="id">
+    <input type="password" name="password">
+    <button>login</button>
+</form>
+</div>
+<div class="for-logged-user">
+    <h1><span id="user-id"></span> 님</h1>
+<button id="do-logout">logout</button>
+</div>
+<script>
+    'use strict'
+    const {remote, ipcRenderer} = require('electron')
+
+    window.onload = function () {
+        const $loginForm = document.getElementById('login-form')
+
+        remote.user
+
+
+        $loginForm.addEventListener('submit', function (e) {
+            e.preventDefault()
+            ipcRenderer.send('login', {
+                id: this.id.value,
+                password: this.password.value,
+            })
+            return false
+        })
+
+        document.getElementById('do-logout').addEventListener('click', function () {
+            ipcRenderer.send('logout')
+        })
+
+        ipcRenderer.on('alert', (e, payload) => {
+            alert(payload)
+        })
+
+        ipcRenderer.on('login.succeed', (e, user) => {
+            console.log(`${user.id} 님 로그인 완료!`)
+            document.body.classList.remove('unlogged')
+            document.body.classList.add('logged')
+            document.getElementById('user-id').innerText = user.id
+        })
+    }
+</script>
+</body>
+</html>
