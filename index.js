@@ -156,7 +156,6 @@ function login(id, password) {
 	})
 	const listner = () => {
 		nativePlayerWindow.webContents.executeJavaScript(`msgStr`, true, msgStr => {
-			console.log(msgStr)
 			if (typeof msgStr === 'string') {
 				nativePlayerWindow.webContents.removeListener('dom-ready', listner)
 			}
