@@ -143,10 +143,10 @@ const submitStoredCredential = () => {
 }
 
 function login(id, password) {
-    tray.setTitle('로그인 중...')
-
-	keytar.setPassword(KEYTAR_SERVICE_NAME, id, password)
-
+	tray.setTitle('로그인 중...')
+	nativePlayerWindow.webContents.session.clearStorageData({
+		storages: ['cookies']
+	})
 	nativePlayerWindow.loadURL(LOGIN_URL, {
 		postData: [{
 			type: 'rawData',
@@ -165,7 +165,10 @@ function login(id, password) {
 				user = {
 					id: id,
 					isLogged: true,
-                }
+				}
+				clearCredentials().then(() => {
+					keytar.setPassword(KEYTAR_SERVICE_NAME, id, password)
+				})
                 tray.setTitle(`${id} 님`)
                 mainWindow.close()
                 mainWindow = null
@@ -184,12 +187,15 @@ function login(id, password) {
 	nativePlayerWindow.webContents.on('dom-ready', listner)
 }
 
-function logout() {
-	keytar.findCredentials(KEYTAR_SERVICE_NAME).then(credentials => {
+function clearCredentials() {
+	return keytar.findCredentials(KEYTAR_SERVICE_NAME).then(credentials => {
 		credentials.map(credential => {
 			keytar.deletePassword(KEYTAR_SERVICE_NAME, credential.account)
 		})
 	})
+}
+function logout() {
+	clearCredentials()
 	nativePlayerWindow.loadURL(LOGOUT_URL)
 }
 
@@ -213,9 +219,7 @@ app.on('window-all-closed', function () {
 })
 
 app.on('activate', function () {
-	if (mainWindow === null) {
-		createMainWindow()
-	}
+	showNativePlayerWindow()
 })
 
 ipcMain.on('login', (e, payload) => {
