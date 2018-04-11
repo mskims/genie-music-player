@@ -143,10 +143,13 @@ const submitStoredCredential = () => {
 }
 
 function login(id, password) {
+	if(!id || !password) { return; }
+
 	tray.setTitle('로그인 중...')
 	nativePlayerWindow.webContents.session.clearStorageData({
 		storages: ['cookies']
 	})
+
 	nativePlayerWindow.loadURL(LOGIN_URL, {
 		postData: [{
 			type: 'rawData',
