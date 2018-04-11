@@ -1,10 +1,12 @@
 {
   "name": "genie-music-player",
+  "productName": "Genie Music Player",
   "version": "1.0.0",
   "description": "Native genie music player on OS X",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "electron ."
   },
   "repository": {
     "type": "git",
@@ -16,10 +18,12 @@
     "url": "https://github.com/mskims/genie-music-player/issues"
   },
   "homepage": "https://github.com/mskims/genie-music-player#readme",
-  "devDependencies": {
-    "electron": "1.8.4",
-    "electron-packager": "^12.0.0",
-    "electron-rebuild": "^1.7.3",
+  "dependencies": {
     "keytar": "^4.2.1"
+  },
+  "devDependencies": {
+    "electron": "^1.4.3",
+    "electron-packager": "^8.1.0",
+    "electron-rebuild": "^1.7.3"
   }
 }
