@@ -84,7 +84,7 @@ function createNativePlayerWindow() {
 
 
 function createTray() {
-	tray = new Tray(path.join('assets', 'trayTemplate.png'))
+	tray = new Tray(path.join(__dirname, 'assets/trayTemplate.png'))
 	tray.on('right-click', toggleNativePlayerWindow)
 	tray.on('double-click', toggleNativePlayerWindow)
 	tray.on('click', function (event) {
