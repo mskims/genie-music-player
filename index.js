@@ -144,6 +144,8 @@ const submitStoredCredential = () => {
 
 function login(id, password) {
     tray.setTitle('로그인 중...')
+	
+	if(!id || !password) { return; }
 
 	keytar.setPassword(KEYTAR_SERVICE_NAME, id, password)
 
