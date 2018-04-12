@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "electron": "^1.4.3",
+    "electron-media-service": "^0.2.2",
     "electron-packager": "^8.1.0",
     "electron-rebuild": "^1.7.3"
   }

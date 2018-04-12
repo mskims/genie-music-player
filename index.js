@@ -8,6 +8,10 @@ const {
 const path = require('path')
 const url = require('url')
 const keytar = require('keytar')
+const MediaService = require('electron-media-service')
+
+const mediaService = new MediaService()
+
 const KEYTAR_SERVICE_NAME = 'genie'
 const GENIE_URL_HTTP = 'http://www.genie.co.kr'
 const GENIE_URL_HTTPS = 'https://www.genie.co.kr'
@@ -23,6 +27,48 @@ let user = {
 let mainWindow
 let nativePlayerWindow
 let tray
+
+class NativePlayerController {
+    constructor(nativePlayerWindow) {
+        this.window = nativePlayerWindow
+    }
+
+    emit(strScript) {
+        strScript += `;
+            if ($('#login-another').is(':visible')) {
+                fnGoAnotherIP();
+            }
+        `
+        this.window.webContents.executeJavaScript(strScript)
+    }
+
+    togglePlay() {
+        this.emit(`audioApi.toggle()`)
+    }
+
+    play() {
+        this.emit(`audioApi.play()`)
+    }
+
+    pause() {
+        this.emit(`audioApi.pause()`)
+    }
+
+    seek(toMs) {
+        this.emit(`audioApi.seek(${toMs / 1000})`)
+    }
+
+    next() {
+        this.emit(`fnPlayNext()`)
+    }
+
+    previous() {
+        this.emit(`fnPlayPrev()`)
+    }
+
+}
+
+let globalPlayerController
 
 // https://www.genie.co.kr/member/popLogin
 function createMainWindow() {
@@ -80,6 +126,9 @@ function createNativePlayerWindow() {
         }
     })
 	// nativePlayerWindow.webContents.openDevTools()
+    })
+
+    globalPlayerController = new NativePlayerController(nativePlayerWindow)
 }
 
 
@@ -210,6 +259,32 @@ app.on('ready', () => {
 	createNativePlayerWindow()
     createTray()
     submitStoredCredential()
+
+    mediaService.startService()
+    mediaService.on('play', () => {
+        console.log('play!')
+        globalPlayerController.play()
+    })
+    mediaService.on('pause', () => {
+        console.log('pause!')
+        globalPlayerController.pause()
+    })
+    mediaService.on('playPause', () => {
+        console.log('playPause!')
+        globalPlayerController.togglePlay()
+    })
+    mediaService.on('next', () => {
+        console.log('next!')
+        globalPlayerController.next()
+    })
+    mediaService.on('previous', () => {
+        console.log('previous')
+        globalPlayerController.previous()
+    })
+    mediaService.on('seek', (toMs) => {
+        console.log(`seek to ${toMs}ms`)
+        globalPlayerController.seek(toMs)
+    })
 })
 
 // Quit when all windows are closed.
