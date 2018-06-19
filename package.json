@@ -3,9 +3,10 @@
   "productName": "Genie Music Player",
   "version": "1.0.0",
   "description": "Native genie music player on OS X",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "standard --fix",
     "dev": "electron ."
   },
   "repository": {
@@ -25,6 +26,11 @@
     "electron": "^1.4.3",
     "electron-media-service": "^0.2.2",
     "electron-packager": "^8.1.0",
-    "electron-rebuild": "^1.7.3"
+    "electron-prebuilt-compile": "^1.8.4",
+    "electron-rebuild": "^1.7.3",
+    "electron-window-manager": "^1.0.6",
+    "genie-music": "^1.1.1",
+    "jquery": "^3.3.1",
+    "webpack-cli": "^2.0.15"
   }
 }
