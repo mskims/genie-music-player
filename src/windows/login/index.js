@@ -16,8 +16,7 @@ export const create = () => {
     fullscreenable: false,
     titleBarStyle: 'hidden-inset',
     resizable: false,
-    transparent: true
-    // movable: true,
+    transparent: true,
   })
 
   loginWindow.loadURL(url.format({
