@@ -6,9 +6,7 @@ import * as LoginWindowHelper from './windows/login'
 
 import * as features from './main/features'
 
-import { updater } from 'update-electron-app'
 
-updater()
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
