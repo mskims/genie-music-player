@@ -6,12 +6,14 @@ import * as LoginWindowHelper from './windows/login'
 
 import * as features from './main/features'
 
-
+import { autoUpdater } from 'electron-updater'
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
+  autoUpdater.checkForUpdatesAndNotify()
+
   features.initialize()
   LoginWindowHelper.create()
   PlayerWindowHelper.create()

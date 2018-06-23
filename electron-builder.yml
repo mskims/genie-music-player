@@ -29,3 +29,7 @@ mac:
   target: dmg
   icon: assets/icon.png
   category: public.app-category.music
+
+publish:
+  provider: github
+

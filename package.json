@@ -1,16 +1,17 @@
 {
   "name": "genie-music-player",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "description": "Native genie music player on OS X",
   "main": "build/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "standard --fix",
     "dev": "electron .",
-    "pack": "npm run pack:clean && npm run pack:compile && npm run pack:pkg",
+    "pack": "npm run pack:clean && npm run pack:compile && build",
     "pack:clean": "rm -rf dist/ build/",
     "pack:compile": "babel src/ --copy-files --out-dir build",
-    "pack:pkg": "electron-builder"
+    "release": "npm run pack:clean && npm run pack:compile && npm run release:pkg",
+    "release:pkg": "build --publish=always"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
   "homepage": "https://github.com/mskims/genie-music-player#readme",
   "dependencies": {
     "jquery": "^3.3.1",
+    "electron-updater": "^2.21.10",
     "@babel/runtime": "^7.0.0-beta.51",
     "genie-music": "^1.1.1",
     "keytar": "^4.2.1"
