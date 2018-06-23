@@ -30,8 +30,6 @@ export const create = () => {
     loginWindow.show()
   })
 
-  // mainWindow.webContents.openDevTools()
-
   // Emitted when the window is closed.
   loginWindow.on('closed', () => {
     WindowManager.del('login')

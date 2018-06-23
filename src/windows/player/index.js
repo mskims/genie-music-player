@@ -26,9 +26,6 @@ export const create = () => {
       playerWindow.hide()
     }
   })
-  playerWindow.webContents.openDevTools({
-    mode: 'detach'
-  })
 
   playerWindow.webContents.on('new-window', (event, url) => {
     event.preventDefault()

@@ -1,7 +1,6 @@
 .idea/
 node_modules/
 
-out/
-release-builds/
+dist/
+build/
 
-src/windows/player/scripts/genieMusic/

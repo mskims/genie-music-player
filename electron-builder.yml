@@ -1,0 +1,31 @@
+appId: com.genie.music.player.app
+copyright: Minseok Kim
+productName: Genie
+
+asar: true
+
+directories:
+  buildResources: dist-assets/
+  output: dist/
+
+files:
+  - LICENSE
+  - package.json
+  - build/
+  - assets/
+  - node_modules/
+
+dmg:
+  contents:
+    - type: link
+      path: /Applications
+      x: 410
+      y: 220
+    - type: file
+      x: 130
+      y: 220
+
+mac:
+  target: dmg
+  icon: assets/icon.png
+  category: public.app-category.music

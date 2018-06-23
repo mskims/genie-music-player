@@ -1,0 +1,4 @@
+{
+  "presets": ["@babel/es2015"],
+  "plugins": ["@babel/plugin-transform-runtime"]
+}
