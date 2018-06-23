@@ -26,7 +26,6 @@ dmg:
       y: 220
 
 mac:
-  target: dmg
   icon: assets/icon.png
   category: public.app-category.music
 
