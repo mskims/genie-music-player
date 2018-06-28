@@ -24,10 +24,11 @@
   },
   "homepage": "https://github.com/mskims/genie-music-player#readme",
   "dependencies": {
-    "jquery": "^3.3.1",
-    "electron-updater": "^2.21.10",
     "@babel/runtime": "^7.0.0-beta.51",
+    "@sentry/electron": "^0.5.5",
+    "electron-updater": "^2.21.10",
     "genie-music": "^1.1.1",
+    "jquery": "^3.3.1",
     "keytar": "^4.2.1"
   },
   "devDependencies": {

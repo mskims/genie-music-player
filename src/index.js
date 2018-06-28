@@ -8,6 +8,12 @@ import * as features from './main/features'
 
 import { autoUpdater } from 'electron-updater'
 
+import * as Sentry from '@sentry/electron';
+
+Sentry.init({
+  dsn: 'https://07f8dc95e4774f0aab891c65271dbd17@sentry.io/1234376',
+});
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
