@@ -1,6 +1,6 @@
 {
   "name": "Genie",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "Native genie music player on OS X",
   "main": "build/index.js",
   "scripts": {
