@@ -9,4 +9,5 @@ const setHooks = () => {
 export const initialize = () => {
   setHooks()
   auth.submitStoredCredential()
+  mediaService.registerMediaKeys()
 }

@@ -1,4 +1,4 @@
-import { Notification, ipcMain } from 'electron'
+import { Notification, ipcMain, globalShortcut } from 'electron'
 import { TrayManager, WindowManager } from '../common'
 
 export const setHooks = () => {
@@ -13,4 +13,19 @@ export const setHooks = () => {
       }).show()
     }
   })
+}
+
+export const registerMediaKeys = () => {
+  globalShortcut.register('mediaplaypause', function () {
+    WindowManager.get('player').webContents.send('track-playpause')
+  })
+  globalShortcut.register('mediaprevioustrack', function () {
+   WindowManager.get('player').webContents.send('track-prev')
+  })
+  globalShortcut.register('medianexttrack', function () {
+    WindowManager.get('player').webContents.send('track-next')
+  })
+}
+export const unregisterMediaKeys = () => {
+  globalShortcut.unregisterAll()
 }
