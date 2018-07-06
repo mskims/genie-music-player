@@ -80,7 +80,7 @@ export const create = () => {
     player.toggle()
   })
 
-  mainTray.setTitle(`Genie v${process.env.npm_package_version}`)
+  mainTray.setTitle(`Genie v${app.getVersion()}`)
 
   TrayManager.set('main', mainTray)
 
