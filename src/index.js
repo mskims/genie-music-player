@@ -1,21 +1,17 @@
 import { app } from 'electron'
+import { autoUpdater } from 'electron-updater'
+import initECM from 'electron-context-menu'
+import * as Sentry from '@sentry/electron'
 
 import * as PlayerWindowHelper from './windows/player'
 import * as TrayHelper from './windows/tray'
-
 import * as features from './main/features'
-
-import { autoUpdater } from 'electron-updater'
-
-import * as Sentry from '@sentry/electron'
-
-import initECM from 'electron-context-menu'
 
 initECM()
 
 Sentry.init({
-  dsn: 'https://07f8dc95e4774f0aab891c65271dbd17@sentry.io/1234376',
-});
+  dsn: 'https://07f8dc95e4774f0aab891c65271dbd17@sentry.io/1234376'
+})
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

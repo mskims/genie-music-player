@@ -14,7 +14,7 @@ export const setHooks = () => {
       }).show()
     }
   })
-  
+
   ipcMain.on('event-FG_layerPopup', (event) => {
     player.show()
   })
@@ -34,7 +34,7 @@ export const registerMediaKeys = () => {
     WindowManager.get('player').webContents.send('track-playpause')
   })
   globalShortcut.register('mediaprevioustrack', function () {
-   WindowManager.get('player').webContents.send('track-prev')
+    WindowManager.get('player').webContents.send('track-prev')
   })
   globalShortcut.register('medianexttrack', function () {
     WindowManager.get('player').webContents.send('track-next')

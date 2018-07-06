@@ -3,9 +3,17 @@
   "version": "1.2.1",
   "description": "Native genie music player on OS X",
   "main": "build/index.js",
+  "standard": {
+    "ignore": [
+      "src/windows/player/scripts/*.js"
+    ]
+  },
+  "pre-commit": [
+    "lint:fix"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "standard --fix",
+    "lint:fix": "standard --fix",
     "dev": "electron .",
     "pack": "npm run pack:clean && npm run pack:compile && build",
     "pack:clean": "rm -rf dist/ build/",
@@ -43,6 +51,7 @@
     "electron-context-menu": "^0.10.0",
     "electron-media-service": "^0.2.2",
     "electron-window-manager": "^1.0.6",
+    "standard": "^11.0.1",
     "webpack-cli": "^2.0.15"
   }
 }
