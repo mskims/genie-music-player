@@ -6,14 +6,13 @@ const AutoLaunch = require('auto-launch')
 
 import {TrayManager} from '../../main/common'
 import * as player from '../player'
-import {logout} from '../../main/features/auth'
 import {registerMediaKeys, unregisterMediaKeys} from '../../main/features/mediaService'
 
 export const create = () => {
   const mainTray = new Tray(path.join(__dirname, '../../../assets/trayTemplate.png'))
-  
+
   const autoLauncher = new AutoLaunch({name: 'Genie'})
-  
+
   const rightClickMenu = Menu.buildFromTemplate([
     {label: '플레이어 열기', click() { player.toggle() }},
     {label: '플레이어 새로고침', click() { player.loadPlayer() }},
@@ -42,17 +41,17 @@ export const create = () => {
       }
     }},
     {type: 'separator'},
-    //{label: '로그아웃', click() { logout() }},
     {label: '종료', role: 'quit'},
   ])
   mainTray.on('right-click', () => {
     mainTray.popUpContextMenu(rightClickMenu)
   })
-  
+
   mainTray.on('click', () => {
     player.toggle()
   })
-  mainTray.setTitle('로그인이 필요합니다')
+
+  mainTray.setTitle(`Genie v${process.env.npm_package_version}`)
 
   TrayManager.set('main', mainTray)
 

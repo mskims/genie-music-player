@@ -1,5 +1,3 @@
-export const KEYTAR_SERVICE_NAME = 'genie'
-
 export const GENIE_URL_HTTP = 'http://www.genie.co.kr'
 export const GENIE_URL_HTTPS = 'https://www.genie.co.kr'
 
