@@ -32,7 +32,7 @@ export const create = () => {
 
     if (url.includes('/member/popLogin')) {
       win.on('close', () => {
-        playerWindow.reload()
+        reload()
       })
     }
 
@@ -65,6 +65,12 @@ export const show = () => {
   playerWindow.setPosition(position.x, position.y, false)
   playerWindow.show()
   playerWindow.focus()
+}
+
+export const reload = () => {
+  const playerWindow = WindowManager.get('player')
+
+  playerWindow.reload()
 }
 
 const getPosition = () => {
