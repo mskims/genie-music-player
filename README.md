@@ -1,5 +1,7 @@
 # 지니 플레이어 for OS X
 
+[![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
+
 ![GitHub release](https://img.shields.io/github/release/mskims/genie-music-player.svg)
 ![Github All Releases](https://img.shields.io/github/downloads/mskims/genie-music-player/total.svg)
 
