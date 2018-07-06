@@ -15,7 +15,7 @@ export const create = () => {
 
   const rightClickMenu = Menu.buildFromTemplate([
     {label: '플레이어 열기', click() { player.toggle() }},
-    {label: '플레이어 새로고침', click() { player.loadPlayer() }},
+    {label: '플레이어 새로고침', click() { player.reload() }},
     {type: 'separator'},
     {label: 'Mac 시작시 자동 실행', type: 'checkbox', checked: autoLauncher.isEnabled(), click(menuItem) {
       if (menuItem.checked) {
