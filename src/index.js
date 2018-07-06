@@ -7,7 +7,11 @@ import * as features from './main/features'
 
 import { autoUpdater } from 'electron-updater'
 
-import * as Sentry from '@sentry/electron';
+import * as Sentry from '@sentry/electron'
+
+import initECM from 'electron-context-menu'
+
+initECM()
 
 Sentry.init({
   dsn: 'https://07f8dc95e4774f0aab891c65271dbd17@sentry.io/1234376',
