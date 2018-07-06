@@ -26,6 +26,8 @@
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.51",
     "@sentry/electron": "^0.5.5",
+    "auto-launch": "^5.0.5",
+    "electron-settings": "^3.2.0",
     "electron-updater": "^2.21.10",
     "genie-music": "^1.1.1",
     "jquery": "^3.3.1"
