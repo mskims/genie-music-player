@@ -2,7 +2,6 @@ import { app } from 'electron'
 
 import * as PlayerWindowHelper from './windows/player'
 import * as TrayHelper from './windows/tray'
-import * as LoginWindowHelper from './windows/login'
 
 import * as features from './main/features'
 
@@ -21,7 +20,6 @@ app.on('ready', () => {
   autoUpdater.checkForUpdatesAndNotify()
 
   features.initialize()
-  LoginWindowHelper.create()
   PlayerWindowHelper.create()
   TrayHelper.create()
 })

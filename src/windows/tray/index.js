@@ -1,8 +1,8 @@
 import path from 'path'
 
-import {Tray} from 'electron'
+import { Tray } from 'electron'
 
-import {TrayManager} from '../../main/common'
+import { TrayManager } from '../../main/common'
 import * as player from '../player'
 
 export const create = () => {
@@ -12,7 +12,8 @@ export const create = () => {
   mainTray.on('click', () => {
     player.toggle()
   })
-  mainTray.setTitle('로그인이 필요합니다')
+
+  mainTray.setTitle(`Genie v${process.env.npm_package_version}`)
 
   TrayManager.set('main', mainTray)
 

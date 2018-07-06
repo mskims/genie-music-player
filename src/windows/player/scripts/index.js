@@ -1,7 +1,5 @@
-console.log(1)
 if (location.pathname === '/player/fPlayer') {
   window.onload = () => {
-    console.log(1)
     const ipc = require('electron').ipcRenderer
 
     const GenieMusic = require('genie-music')
@@ -12,4 +10,6 @@ if (location.pathname === '/player/fPlayer') {
       ipc.send('track-changed', track)
     })
   }
+} else {
+  location.replace('/player/fPlayer')
 }
