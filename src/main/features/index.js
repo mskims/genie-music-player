@@ -1,5 +1,5 @@
 import { app } from 'electron'
-const settings = require('electron-settings')
+import settings from 'electron-settings'
 
 import * as mediaService from './mediaService'
 
@@ -13,7 +13,7 @@ export const initialize = () => {
   if (settings.get('useMediaKeys', true)) {
     mediaService.registerMediaKeys()
   }
-  if (settings.get('showOnDock', false) == false) {
+  if (!settings.get('showOnDock', false)) {
     app.dock.hide()
   }
 }

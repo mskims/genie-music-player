@@ -1,5 +1,5 @@
 import { BrowserWindow } from 'electron'
-import { CurrentUser, TrayManager, WindowManager } from '../../main/common'
+import { TrayManager, WindowManager } from '../../main/common'
 import path from 'path'
 import * as constants from '../../main/constants'
 
@@ -14,7 +14,7 @@ export const create = () => {
     webPreferences: {
       nodeIntegration: false,
       preload: path.join(__dirname, 'scripts/index.js'),
-      backgroundThrottling: false,
+      backgroundThrottling: false
     },
     backgroundColor: '#ffffff'
   })
@@ -26,7 +26,7 @@ export const create = () => {
       resizable: false,
       parent: playerWindow,
       webPreferences: {
-        nodeIntegration: false,
+        nodeIntegration: false
       }
     })
 
