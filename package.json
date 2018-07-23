@@ -52,6 +52,7 @@
     "electron-media-service": "^0.2.2",
     "electron-window-manager": "^1.0.6",
     "standard": "^11.0.1",
+    "throttle-debounce": "^2.0.0",
     "webpack-cli": "^2.0.15"
   }
 }
