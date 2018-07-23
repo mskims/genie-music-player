@@ -1,6 +1,7 @@
 import { dialog } from 'electron'
 import { autoUpdater } from 'electron-updater'
 
+let updater
 autoUpdater.autoDownload = false
 
 autoUpdater.on('error', (error) => {
@@ -21,6 +22,10 @@ autoUpdater.on('update-available', (info) => {
         title: 'Okay..',
         message: '알겠어요......... 😞'
       })
+      if (updater) {
+        updater.enabled = true
+        updater = null
+      }
     }
   })
 })
@@ -36,4 +41,19 @@ autoUpdater.on('update-downloaded', () => {
 
 export const initialize = () => {
   autoUpdater.checkForUpdates()
+}
+
+export const checkForUpdates = (menuItem, focusedWindow, event) => {
+  updater = menuItem
+  updater.enabled = false
+  autoUpdater.checkForUpdates()
+
+  autoUpdater.once('update-not-available', () => {
+    dialog.showMessageBox({
+      title: 'No Updates',
+      message: '최신버전이네요! 축하드립니다 🎉'
+    })
+    updater.enabled = true
+    updater = null
+  })
 }
