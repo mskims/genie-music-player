@@ -17,8 +17,6 @@ Sentry.init({
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
-  autoUpdater.checkForUpdatesAndNotify()
-
   features.initialize()
   PlayerWindowHelper.create()
   TrayHelper.create()

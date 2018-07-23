@@ -8,6 +8,7 @@ import AutoLaunch from 'auto-launch'
 import {TrayManager} from '../../main/common'
 import * as player from '../player'
 import {registerMediaKeys, unregisterMediaKeys} from '../../main/features/mediaService'
+import {checkForUpdates} from '../../main/features/autoUpdate'
 
 export const create = () => {
   const mainTray = new Tray(path.join(__dirname, '../../../assets/trayTemplate.png'))
@@ -66,6 +67,10 @@ export const create = () => {
     },
     {
       type: 'separator'
+    },
+    {
+      label: '업데이트 확인',
+      click: checkForUpdates
     },
     {
       label: '종료',
