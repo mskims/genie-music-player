@@ -1,5 +1,6 @@
 import { BrowserWindow } from 'electron'
 import { TrayManager, WindowManager } from '../../main/common'
+import { debounce } from 'throttle-debounce'
 import path from 'path'
 import * as constants from '../../main/constants'
 
@@ -10,7 +11,7 @@ export const create = () => {
     show: false,
     frame: false,
     fullscreenable: false,
-    resizable: false,
+    resizable: true,
     webPreferences: {
       nodeIntegration: false,
       preload: path.join(__dirname, 'scripts/index.js'),
@@ -19,25 +20,41 @@ export const create = () => {
     backgroundColor: '#ffffff'
   })
 
+  playerWindow.on('resize', debounce(300, false, () => {
+    const tray = TrayManager.get('main')
+
+    fitWindowSizeOnTray(playerWindow, tray)
+  }))
+
+  playerWindow.on('blur', () => {
+    if (!playerWindow.webContents.isDevToolsOpened() && !WindowManager.exists('popup')) {
+      playerWindow.hide()
+    }
+  })
+
   playerWindow.webContents.on('new-window', (event, url) => {
     event.preventDefault()
-    const win = new BrowserWindow({
+    const popupWindow = new BrowserWindow({
       width: 1000,
       resizable: false,
       parent: playerWindow,
+      show: false,
       webPreferences: {
         nodeIntegration: false
       }
     })
 
     if (url.includes('/member/popLogin')) {
-      win.on('close', () => {
+      popupWindow.on('close', () => {
         reload()
       })
     }
 
-    win.loadURL(url)
-    event.newGuest = win
+    popupWindow.loadURL(url)
+
+    WindowManager.set('popup', popupWindow)
+
+    popupWindow.show()
   })
 
   playerWindow.loadURL(constants.PLAYER_URL)
@@ -61,8 +78,10 @@ export const toggle = () => {
 
 export const show = () => {
   const playerWindow = WindowManager.get('player')
-  const position = getPosition()
-  playerWindow.setPosition(position.x, position.y, false)
+  const tray = TrayManager.get('main')
+
+  fitWindowSizeOnTray(playerWindow, tray)
+
   playerWindow.show()
   playerWindow.focus()
 }
@@ -73,9 +92,9 @@ export const reload = () => {
   playerWindow.reload()
 }
 
-const getPosition = () => {
-  const windowBounds = WindowManager.get('player').getBounds()
-  const trayBounds = TrayManager.get('main').getBounds()
+const fitWindowSizeOnTray = (window, tray) => {
+  const windowBounds = window.getBounds()
+  const trayBounds = tray.getBounds()
 
   // Center window horizontally below the tray icon
   const x = Math.round(trayBounds.x + (trayBounds.width / 2) - (windowBounds.width / 2))
@@ -83,5 +102,6 @@ const getPosition = () => {
   // Position window 4 pixels vertically below the tray icon
   const y = Math.round(trayBounds.y + trayBounds.height + 4)
 
-  return {x: x, y: y}
+  window.setPosition(x, y, false)
 }
+
