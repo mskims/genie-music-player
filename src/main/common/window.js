@@ -5,6 +5,10 @@ class BaseManager {
 
   set (name, target) {
     this.storage[name] = target
+
+    target.on('closed', () => {
+      delete this.storage[name];
+    });
   }
 
   get (name) {
