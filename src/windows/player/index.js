@@ -1,13 +1,19 @@
 import { BrowserWindow } from 'electron'
 import { TrayManager, WindowManager } from '../../main/common'
-import { debounce } from 'throttle-debounce'
-import path from 'path'
 import * as constants from '../../main/constants'
+import { debounce } from 'throttle-debounce'
+import settings from 'electron-settings'
+import path from 'path'
 
 export const create = () => {
+  const initialPlayerWindowBounds = settings.get('playerWindowSize', {
+      width: 450,
+      height: 500
+  })
+
   const playerWindow = new BrowserWindow({
-    width: 450,
-    height: 500,
+    width: initialPlayerWindowBounds.width,
+    height: initialPlayerWindowBounds.height,
     show: false,
     frame: false,
     fullscreenable: false,
@@ -24,6 +30,12 @@ export const create = () => {
     const tray = TrayManager.get('main')
 
     fitWindowSizeOnTray(playerWindow, tray)
+
+    const playerWindowBounds = playerWindow.getBounds()
+    settings.set('playerWindowSize', {
+      width: playerWindowBounds.width,
+      height: playerWindowBounds.height
+    })
   }))
 
   playerWindow.on('blur', () => {
