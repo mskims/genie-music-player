@@ -1,3 +1,9 @@
+# 주의!
+
+지니가 맥용 PC 플레이어 지원을 발표했습니다. 사용자분들은 이 저장소의 사용을 **멈춰주시고**, 아래 링크를 통해 공식 플레이어를 사용해 주세요.
+
+[공식 플레이어 다운로드](https://www.genie.co.kr/guide/geniePC#playerTab1)
+
 # 지니 플레이어 for OS X
 
 [![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
